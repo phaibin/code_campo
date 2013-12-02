@@ -1,40 +1,45 @@
-source 'http://rubygems.org'
+source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.13'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.1'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
 
-gem 'bcrypt-ruby'
-gem 'mongoid'
-gem 'bson_ext'
-gem 'haml'
-gem 'anjlab-bootstrap-rails', '>= 2.1', :require => 'bootstrap-rails'
-gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git'
-gem 'client_side_validations-mongoid'
-gem 'kaminari'
-gem 'gravtastic'
-gem 'wmd-rails'
-gem 'redcarpet'
-gem 'http_accept_language'
-gem 'rails-i18n'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'highlight_js-rails'
-gem 'rails-timeago'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
 
-gem 'whenever', :require => false
-gem 'capistrano', :require => false
-gem 'rvm-capistrano', :require => false
-gem 'quiet_assets'
+# Use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.1.2'
 
-group :test, :development do
-  gem 'factory_girl_rails'
-end
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]
