@@ -1,10 +1,9 @@
 # == Schema Information
 #
-# Table name: topic_tags
+# Table name: sites
 #
 #  id         :integer          not null, primary key
-#  topic_id   :integer
-#  tag_id     :integer
+#  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #

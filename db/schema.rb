@@ -11,11 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202092501) do
+ActiveRecord::Schema.define(version: 20131203094021) do
+
+  create_table "fragments", force: true do |t|
+    t.string   "home_mainbar_bottom"
+    t.string   "home_sidebar_bottom"
+    t.string   "topics_sidebar_bottom"
+    t.string   "footer"
+    t.integer  "site_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "replies", force: true do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sites", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,6 +64,8 @@ ActiveRecord::Schema.define(version: 20131202092501) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "actived_at"
+    t.datetime "edited_at"
   end
 
   create_table "users", force: true do |t|

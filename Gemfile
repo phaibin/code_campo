@@ -16,7 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -44,5 +44,30 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# use pry for rails console
 gem 'pry-rails'
+
+# haml tempalte
 gem 'haml'
+
+# generate Gravatar
+gem 'gravtastic'
+
+# page support
+gem 'kaminari'
+
+
+gem 'rails-timeago'
+gem 'highlight_js-rails'
+
+# sass bootstrap
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
+
+gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git'
+
+group :development do
+  # add fields comment for active-record
+  gem 'annotate'
+end
+
+gem 'redcarpet'

@@ -1,12 +1,15 @@
 # == Schema Information
 #
-# Table name: topic_tags
+# Table name: fragments
 #
-#  id         :integer          not null, primary key
-#  topic_id   :integer
-#  tag_id     :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id                    :integer          not null, primary key
+#  home_mainbar_bottom   :string(255)
+#  home_sidebar_bottom   :string(255)
+#  topics_sidebar_bottom :string(255)
+#  footer                :string(255)
+#  site_id               :integer
+#  created_at            :datetime
+#  updated_at            :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
