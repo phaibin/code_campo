@@ -1,6 +1,6 @@
 %tr{:id => topic.anchor}
   %td.avatar
-    = link_avatar_to_person(topic.user)
+    = link_avatar_to_person(topic.author)
   %td.content
     %h3
       = link_to topic.title, topic_path(topic, :page => topic.last_page)
@@ -10,7 +10,7 @@
           - topic.tags.each do |tag|
             = link_to tag.name, tagged_topics_path(:tag => tag.name)
       %span.author
-        = link_to_person(topic.user)
+        = link_to_person(topic.author)
       %span.time
         = t 'created_at'
         = format_time topic.created_at

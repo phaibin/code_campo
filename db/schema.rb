@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203094021) do
+ActiveRecord::Schema.define(version: 20131206063134) do
 
   create_table "fragments", force: true do |t|
     t.string   "home_mainbar_bottom"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20131203094021) do
   end
 
   create_table "replies", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "author_id"
     t.integer  "topic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 20131203094021) do
     t.datetime "updated_at"
   end
 
+  create_table "topic_marked_users", force: true do |t|
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topic_marked_users", ["topic_id"], name: "index_topic_marked_users_on_topic_id"
+  add_index "topic_marked_users", ["user_id"], name: "index_topic_marked_users_on_user_id"
+
   create_table "topic_tags", force: true do |t|
     t.integer  "topic_id"
     t.integer  "tag_id"
@@ -61,7 +71,7 @@ ActiveRecord::Schema.define(version: 20131203094021) do
   create_table "topics", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.integer  "user_id"
+    t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "actived_at"

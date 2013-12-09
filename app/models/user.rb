@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   include Gravtastic
   gravtastic :rating => 'G', :size => 48, :secure => false
   
-  has_many :topics
-  has_many :replies
+  has_many :topics, foreign_key: :author_id
+  has_many :replies, foreign_key: :author_id
   has_one :profile
 
   before_create :build_profile

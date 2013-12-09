@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def link_to_person(user)
-    link_to user.name, person_path(:name => user)
+    link_to user.name, person_path(:name => user.name)
   end
 
   def format_time(time)

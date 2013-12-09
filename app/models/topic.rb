@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  title      :string(255)
 #  content    :text
-#  user_id    :integer
+#  author_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
 #  actived_at :datetime
@@ -13,12 +13,14 @@
 #
 
 class Topic < ActiveRecord::Base
-  include Mentionable
+  # include Mentionable
 
   has_many :replies, dependent: :destroy
   has_many :topic_tags
   has_many :tags, through: :topic_tags
-  belongs_to :user, as: :author
+  belongs_to :author, class_name: 'User'
+  has_many :topic_marked_users
+  has_many :marked_users, through: :topic_marked_users, source: :user
 
   before_create :set_actived_at
 
@@ -50,6 +52,33 @@ class Topic < ActiveRecord::Base
   end
 
   def relate_topics(count)
-    Topic.active.joins(:tags).where('tags.name in ?', tags).limit(count).where.not(id: id)
+    Topic.active.joins(:tags).where('tags.name in (?)', self.tags.map(&:name)).where.not(id: id).limit(count)
   end
+
+  # mark begin
+  def mark_by(user)
+    unless marked_by? user
+      collection.update({:_id => self.id},
+        {"$addToSet" => {:marker_ids => user.id}})
+      marker_ids.push user.id
+    end
+  end
+
+  def unmark_by(user)
+    if marked_by? user
+      collection.update({:_id => self.id},
+        {"$pull" => {:marker_ids => user.id}})
+      marker_ids.delete user.id
+    end
+  end
+
+  def marked_by?(user)
+    marker_ids.include? user.id
+  end
+
+  def marker_count
+    marked_users.count
+  end
+  # mark end
+
 end

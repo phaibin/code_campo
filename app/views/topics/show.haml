@@ -28,20 +28,20 @@
                       - if @topic.tags && @topic.tags.any?
                         %span.tags
                           - @topic.tags.each do |tag|
-                            = link_to tag, tagged_topics_path(:tag => tag)
+                            = link_to tag.name, tagged_topics_path(:tag => tag)
                       %span.author
-                        = link_to_person @topic.user
+                        = link_to_person @topic.author
                       %span.time
                         = t('created_at')
                         = format_time @topic.created_at
                         - if @topic.edited?
                           = t('updated_at')
                           = format_time @topic.edited_at
-                      - if logined? && current_user == @topic.user
+                      - if logined? && current_user == @topic.author
                         = link_to t('edit'), edit_topic_path(@topic)
                     %td.avatar
-                      = link_to image_tag(@topic.user.gravatar_url(:size => 72)), person_path(@topic.user)
-            ~ format_text @topic.content, :mention_names => @topic.mentioned_user_names
+                      = link_to image_tag(@topic.author.gravatar_url(:size => 72)), person_path(@topic.author)
+            / ~ format_text @topic.content, :mention_names => @topic.mentioned_user_names
             %footer
               = render :partial => 'marks_count', :locals => {:topic => @topic}
         %section#replies.box.no-padding

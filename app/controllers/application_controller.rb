@@ -42,4 +42,14 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def require_no_logined
+    if logined?
+      redirect_to root_url
+    end
+  end
+
+  def store_location(path = nil)
+    session[:return_to] = path || request.fullpath
+  end
 end

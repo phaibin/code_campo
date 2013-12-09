@@ -1,10 +1,10 @@
 $(function(){
-  $('a[rel*=external]').live('click', function() {
+  $('a[rel*=external]').on('click', function() {
     event.preventDefault();
     window.open(this.href, '_blank');
   });
 
-  $('[data-remote]').live('ajax:before', function() {
+  $('[data-remote]').on('ajax:before', function() {
     var $loader = $('#remote-loader');
     if (!$loader.length) {
       $loader = $('<div id="remote-loader"></div>').hide().prependTo($('body'));
