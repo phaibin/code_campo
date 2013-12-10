@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206063134) do
+ActiveRecord::Schema.define(version: 20131210090324) do
 
   create_table "fragments", force: true do |t|
     t.string   "home_mainbar_bottom"
@@ -83,6 +83,9 @@ ActiveRecord::Schema.define(version: 20131206063134) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
+    t.string   "access_token"
+    t.string   "locale",          default: "zh-CN"
   end
 
 end

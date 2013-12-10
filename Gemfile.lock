@@ -6,12 +6,6 @@ GIT
       railties (>= 3.0)
       sass (>= 3.2)
 
-GIT
-  remote: git://github.com/bcardarella/client_side_validations.git
-  revision: a6a515504520e9925ca63524ae9854168163283e
-  specs:
-    client_side_validations (3.2.1)
-
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -44,6 +38,7 @@ GEM
       rake (>= 0.8.7)
     arel (4.0.1)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
     builder (3.1.4)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -153,7 +148,7 @@ PLATFORMS
 DEPENDENCIES
   anjlab-bootstrap-rails!
   annotate
-  client_side_validations!
+  bcrypt-ruby
   coffee-rails (~> 4.0.0)
   gravtastic
   haml

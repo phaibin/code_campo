@@ -6,8 +6,8 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    login = /^#{params[:login]}$/i
-    user = User.any_of({:name => login}, {:email => login}).first
+    login = params[:login].downcase
+    user = User.where("lower(name)=? and lower(email)=?", login, login).first
     if user and user.authenticate(params[:password])
       login_as user
       remember_me if params[:remember_me]

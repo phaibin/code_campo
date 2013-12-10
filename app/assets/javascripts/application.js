@@ -7,8 +7,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require rails.validations
-//= require rails.validations.custom
 //= require highlight
 //= require rails-timeago
 //= require code_campo

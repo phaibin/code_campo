@@ -63,7 +63,8 @@ gem 'highlight_js-rails'
 # sass bootstrap
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
 
-gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git'
+# gem 'client_side_validations', :git => 'https://github.com/bcardarella/client_side_validations.git', :branch => "rails-4.0-quick-fixes"
+
 
 group :development do
   # add fields comment for active-record
@@ -71,3 +72,5 @@ group :development do
 end
 
 gem 'redcarpet'
+
+gem 'bcrypt-ruby'
