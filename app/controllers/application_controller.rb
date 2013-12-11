@@ -17,8 +17,26 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
+  def require_logined
+    unless logined?
+      store_location
+      redirect_to login_url
+    end
+  end
+
   def logined?
     !!current_user
+  end
+
+  def login_as(user)
+    session[:user_id] = user.id
+    @current_user = user
+  end
+
+  def logout
+    session.delete(:user_id)
+    @current_user = nil
+    forget_me
   end
 
   def login_from_session
@@ -29,6 +47,22 @@ class ApplicationController < ActionController::Base
         session[:user_id] = nil
       end
     end
+  end
+
+  def forget_me
+    cookies.delete(:remember_token)
+  end
+
+  def remember_me
+    cookies[:remember_token] = {
+      :value   => current_user.remember_token,
+      :expires => 2.weeks.from_now
+    }
+  end
+
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
   end
   
   def login_from_cookies

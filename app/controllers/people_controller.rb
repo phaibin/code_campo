@@ -12,6 +12,6 @@ class PeopleController < ApplicationController
   def find_person
     # @person = User.first :conditions => {:name => /^#{params[:name]}$/i}
     @person = User.where("lower(name)=?", params[:name].downcase).first
-    raise Mongoid::Errors::DocumentNotFound.new(User, params[:name]) if @person.nil?
+    raise ActiveRecord::RecordNotFound.new(params[:name]) if @person.nil?
   end
 end

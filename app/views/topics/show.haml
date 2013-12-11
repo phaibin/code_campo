@@ -41,7 +41,7 @@
                         = link_to t('edit'), edit_topic_path(@topic)
                     %td.avatar
                       = link_to image_tag(@topic.author.gravatar_url(:size => 72)), person_path(@topic.author)
-            / ~ format_text @topic.content, :mention_names => @topic.mentioned_user_names
+            ~ format_text @topic.content
             %footer
               = render :partial => 'marks_count', :locals => {:topic => @topic}
         %section#replies.box.no-padding

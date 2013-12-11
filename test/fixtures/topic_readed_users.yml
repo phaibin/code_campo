@@ -1,12 +1,17 @@
 # == Schema Information
 #
-# Table name: tags
+# Table name: topic_readed_users
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  index_value :integer          default(0)
+#  id         :integer          not null, primary key
+#  topic_id   :integer
+#  user_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+# Indexes
+#
+#  index_topic_readed_users_on_topic_id  (topic_id)
+#  index_topic_readed_users_on_user_id   (user_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

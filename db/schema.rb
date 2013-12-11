@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210090324) do
+ActiveRecord::Schema.define(version: 20131211074102) do
 
   create_table "fragments", force: true do |t|
     t.string   "home_mainbar_bottom"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20131210090324) do
     t.integer  "topic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "content"
   end
 
   create_table "sites", force: true do |t|
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20131210090324) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "index_value", default: 0
   end
 
   create_table "topic_marked_users", force: true do |t|
@@ -60,6 +62,16 @@ ActiveRecord::Schema.define(version: 20131210090324) do
 
   add_index "topic_marked_users", ["topic_id"], name: "index_topic_marked_users_on_topic_id"
   add_index "topic_marked_users", ["user_id"], name: "index_topic_marked_users_on_user_id"
+
+  create_table "topic_readed_users", force: true do |t|
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topic_readed_users", ["topic_id"], name: "index_topic_readed_users_on_topic_id"
+  add_index "topic_readed_users", ["user_id"], name: "index_topic_readed_users_on_user_id"
 
   create_table "topic_tags", force: true do |t|
     t.integer  "topic_id"

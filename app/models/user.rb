@@ -39,4 +39,8 @@ class User < ActiveRecord::Base
   def generate_token
     SecureRandom.hex(32)
   end
+
+  def admin?
+    APP_CONFIG['admin_emails'].include?(self.email)
+  end
 end

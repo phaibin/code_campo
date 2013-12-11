@@ -21,10 +21,20 @@ class Topic < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
   has_many :topic_marked_users
   has_many :marked_users, through: :topic_marked_users, source: :user
+  has_many :topic_readed_users
+  has_many :readed_users, through: :topic_readed_users, source: :user
 
   before_create :set_actived_at
 
   scope :active, -> { order('actived_at desc') }
+
+  def tag_string=(string)
+    self.tags = string.to_s.downcase.split(/[,\s]+/).uniq
+  end
+
+  def tag_string
+    self.tags.join(', ')
+  end
 
   def anchor
     "topic-#{id}"
@@ -58,22 +68,18 @@ class Topic < ActiveRecord::Base
   # mark begin
   def mark_by(user)
     unless marked_by? user
-      collection.update({:_id => self.id},
-        {"$addToSet" => {:marker_ids => user.id}})
-      marker_ids.push user.id
+      marked_users << user
     end
   end
 
   def unmark_by(user)
     if marked_by? user
-      collection.update({:_id => self.id},
-        {"$pull" => {:marker_ids => user.id}})
-      marker_ids.delete user.id
+      marked_users.delete user
     end
   end
 
   def marked_by?(user)
-    marker_ids.include? user.id
+    marked_users.include? user
   end
 
   def marker_count
@@ -81,4 +87,13 @@ class Topic < ActiveRecord::Base
   end
   # mark end
 
+  def last_read?(user)
+    readed_users.include? user
+  end
+
+  def read_by(user)
+    unless last_read?(user)
+      readed_users << user
+    end
+  end
 end

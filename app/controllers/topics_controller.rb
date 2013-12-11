@@ -56,7 +56,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = current_user.topics.new params[:topic]
+    @topic = current_user.topics.new topic_params
     if @topic.save
       redirect_to @topic
     else
@@ -68,11 +68,11 @@ class TopicsController < ApplicationController
     @replies = @topic.replies.page(params[:page])
 
     if logined?
-      if !@topic.last_read?(current_user) && current_user.notifications.has_unread?
-        current_user.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => @topic.id},
-                                                 {:mentionable_type => 'Reply', :mentionable_id.in => @replies.map(&:id)},
-                                                 {:reply_id.in => @replies.map(&:id)}).update_all(:read => true)
-      end
+      # if !@topic.last_read?(current_user) && current_user.notifications.has_unread?
+      #   current_user.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => @topic.id},
+      #                                            {:mentionable_type => 'Reply', :mentionable_id.in => @replies.map(&:id)},
+      #                                            {:reply_id.in => @replies.map(&:id)}).update_all(:read => true)
+      # end
       @topic.read_by current_user
       @reply = current_user.replies.new :topic => @topic
     end
@@ -115,7 +115,7 @@ class TopicsController < ApplicationController
   end
 
   def find_user_topic
-    @topic = current_user.topics.number(params[:id])
+    @topic = current_user.topics.find(params[:id])
   end
 
   # TODO remove
@@ -124,5 +124,11 @@ class TopicsController < ApplicationController
       topic = Topic.first :conditions => {:_id => params[:id]}
       redirect_to(topic, :status => 301) if topic
     end
+  end
+
+  private
+
+  def topic_params
+    params.require(:topic).permit(:title, :content, :tag_string)
   end
 end

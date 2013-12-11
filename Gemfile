@@ -74,3 +74,7 @@ end
 gem 'redcarpet'
 
 gem 'bcrypt-ruby'
+
+gem 'rails-i18n'
+
+gem 'wmd-rails'

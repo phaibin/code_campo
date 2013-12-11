@@ -19,5 +19,11 @@ module CodeCampo
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = 'zh-CN'
+
+    config.assets.precompile += %w(editor.js topics/show.js)
+    config.assets.precompile += %w(editor.css search.css)
   end
 end
+
+AllowLocale = Dir["#{Rails.root}/config/locales/*.yml"].map {|f| File.basename(f).split('.').first}
+APP_CONFIG = YAML.load_file("#{Rails.root}/config/app_config.yml")[Rails.env]

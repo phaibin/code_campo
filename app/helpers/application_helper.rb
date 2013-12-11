@@ -8,8 +8,8 @@ module ApplicationHelper
   end
   
   def page_title_with_notification
-    if logined? && current_user.notifications.unread.count != 0
-      "(#{current_user.notifications.unread.count}) #{page_title}"
+    if logined? 
+      "#{page_title}"
     else
       page_title
     end
@@ -38,7 +38,7 @@ module ApplicationHelper
 
   def link_avatar_to_person(user, options = {})
     options[:size] ||= 48
-    link_to image_tag(user.gravatar_url(:size => options[:size])), person_path(:name => user)
+    link_to image_tag(user.gravatar_url(:size => options[:size])), person_path(:name => user.name)
   end
 
   def link_to_person(user)
