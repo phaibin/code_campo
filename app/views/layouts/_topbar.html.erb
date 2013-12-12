@@ -1,0 +1,75 @@
+<div id="topbar">
+  <div class="container">
+    <div class="logo">
+      <%= link_to @site.name, root_path %>
+    </div>
+    <ul class="nav nav-pills">
+      <li class="<%= (controller_name == 'homepage' ? 'active' : nil) %>">
+        <%= link_to t('.home'), root_path %>
+      </li>
+      <li class="<%= (controller_name == 'topics' ? 'active' : nil) %> dropdown">
+        <a class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="<%= topics_path %>">
+          <%= t('.topics') %>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to t('.active'), topics_path %>
+          </li>
+          <li>
+            <%= link_to t('.newest'), newest_topics_path %>
+          </li>
+          <% if logined? %>
+            <li>
+              <%= link_to t('.marked'), marked_topics_path %>
+            </li>
+            <li>
+              <%= link_to t('.my'), my_topics_path %>
+            </li>
+            <li>
+              <%= link_to t('.replied'), replied_topics_path %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="<%= (controller_name == 'search' ? 'active' : nil) %>">
+        <%= link_to t('.search'), search_path %>
+      </li>
+    </ul>
+    <ul class="nav nav-pills pull-right">
+      <% if logined? %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="<%= person_path(:name => current_user) %>">
+            <%= current_user.name %>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to t('.profiles'), person_path(:name => current_user.name) %>
+            </li>
+            <li>
+              <%= link_to t('.settings'), settings_account_path %>
+            </li>
+            <% if current_user.admin? %>
+              <li class="divider"></li>
+              <li>
+                <%= link_to t('.admin_dashboard'), admin_dashboard_path %>
+              </li>
+            <% end %>
+            <li class="divider"></li>
+            <li>
+              <%= link_to t('logout'), logout_path, :method => :delete %>
+            </li>
+          </ul>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to t('signup'), signup_path %>
+        </li>
+        <li>
+          <%= link_to t('login'), login_path %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

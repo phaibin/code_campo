@@ -1,0 +1,53 @@
+<% @subscribe_url = newest_topics_url(:format => :rss) %>
+<div id="main">
+  <div class="container">
+    <div class="row">
+      <div class="span9" id="mainbar">
+        <section class="box no-padding" id="topics">
+          <table class="item-list">
+            <tbody>
+              <%= render :partial => 'topics/topic', :collection => @topics %>
+            </tbody>
+          </table>
+          <footer>
+            <%= link_to t('.more_topics'), topics_path %>
+          </footer>
+        </section>
+        <%= raw @site.fragment.home_mainbar_bottom %>
+      </div>
+      <div class="span3" id="sidebar">
+        <% if logined? %>
+          <%= render :partial => 'shared/sidebar_profile' %>
+          <section class="box">
+            <%= link_to t('.create_topic'), new_topic_path(:tag => params[:tag]), :class => 'btn btn-primary' %>
+          </section>
+        <% else %>
+          <%= render :partial => 'shared/sidebar_login' %>
+        <% end %>
+        <section class="box">
+          <header>
+            <%= t('.subscribe') %>
+          </header>
+          <%= link_to image_tag('rss.png'), newest_topics_url(:format => :rss) %>
+        </section>
+        <section class="box">
+          <header>
+            <%= t('.site_status') %>
+          </header>
+          <ul>
+            <li>
+              <%= t '.users_count', :count => @users_count %>
+            </li>
+            <li>
+              <%= t '.topics_count', :count => @topics_count %>
+            </li>
+            <li>
+              <%= t '.replies_count', :count => @replies_count %>
+            </li>
+          </ul>
+        </section>
+        <%= raw @site.fragment.home_sidebar_bottom %>
+      </div>
+    </div>
+  </div>
+</div>
