@@ -1,0 +1,58 @@
+<div id="main">
+  <div class="container">
+    <div class="row">
+      <div class="span9" id="mainbar">
+        <section class="box" id="profile">
+          <div class="profile-wrap">
+            <div class="profile-inner">
+              <div class="avatar">
+                <%= image_tag @person.gravatar_url(:size => 128) %>
+              </div>
+              <div class="info">
+                <h1>
+                  <%= @person.profile.name.present? ? @person.profile.name : @person.name %>
+                  <small>
+                    <%= "@#{@person.name}" %>
+                  </small>
+                </h1>
+                <% if @person.profile.description.present? %>
+                  <%= simple_format @person.profile.description %>
+                <% end %>
+                <% if @person.profile.url.present? %>
+                  <%= link_to @person.profile.url, @person.profile.url, :rel => 'external nofollow' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% if @person == current_user %>
+            <footer>
+              <%= link_to t('.edit_profile'), settings_profile_path, :class => 'btn' %>
+            </footer>
+          <% end %>
+        </section>
+        <section class="box no-padding" id="topics">
+          <table class="item-list">
+            <tbody>
+              <%= render :partial => 'topics/topic', :collection => @topics %>
+            </tbody>
+          </table>
+        </section>
+      </div>
+      <div class="span3" id="sidebar">
+        <section class="box">
+          <header>
+            <%= t('.person_status') %>
+          </header>
+          <ul>
+            <li>
+              <%= t '.topics_count', :count => @topics_count %>
+            </li>
+            <li>
+              <%= t '.replies_count', :count => @replies_count %>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

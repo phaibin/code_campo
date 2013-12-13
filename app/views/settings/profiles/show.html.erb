@@ -1,0 +1,49 @@
+<header>
+  <h3>
+    <%= t '.profile_settings' %>
+  </h3>
+</header>
+<%= form_for current_user.profile, :url => settings_profile_path, :validate => true do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :avatar %>
+      </div>
+      <div class="controls">
+        <div class="avatar">
+          <%= image_tag current_user.gravatar_url(:size => 160) %>
+        </div>
+        <p>
+          <%= link_to t('.change_email'), settings_account_path %>
+          <%= '/' %>
+          <%= link_to t('.go_to_gravatar'), 'http://www.gravatar.com', :rel => 'external' %>
+        </p>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :name %>
+      </div>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'span3' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :url %>
+      </div>
+      <div class="controls">
+        <%= f.text_field :url, :class => 'span3' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :description %>
+      </div>
+      <div class="controls">
+        <%= f.text_area :description, :rows => 5, :class => 'span6' %>
+      </div>
+    </div>
+    <%= f.submit t('save'), :class => 'btn primary' %>
+  </fieldset>
+<% end %>

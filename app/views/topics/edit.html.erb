@@ -1,0 +1,41 @@
+<% @page_title = "#{t('edit')}#{t('.topics')}" %>
+<% content_for :head do %>
+  <%= javascript_include_tag 'editor' %>
+  <%= stylesheet_link_tag 'editor' %>
+<% end %>
+<div id="main">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <ul class="breadcrumb">
+          <li>
+            <%= link_to t('.topics'), topics_path %>
+            <span class="divider">/</span>
+          </li>
+          <li>
+            <%= link_to @topic.title, @topic %>
+            <span class="divider">/</span>
+          </li>
+          <li class="active">
+            <%= t('edit') %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span9" id="mainbar">
+        <section class="box" id="editor">
+          <%= form_for @topic, :validate => true do |f| %>
+            <%= render :partial => 'form', :object => f %>
+            <div class="control-group">
+              <%= f.submit t('update'), :class => 'btn primary' %>
+            </div>
+          <% end %>
+        </section>
+      </div>
+      <div class="span3" id="sidebar">
+        <%= render :partial => 'shared/sidebar_profile' %>
+      </div>
+    </div>
+  </div>
+</div>

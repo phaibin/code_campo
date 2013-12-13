@@ -1,0 +1,14 @@
+<section class="profile box">
+  <div class="clearfix">
+    <div class="avatar">
+      <%= link_avatar_to_person current_user, :size => 64 %>
+    </div>
+    <div class="info">
+      <%= t '.signed_as' %>
+      <h3>
+        <%= current_user.name %>
+      </h3>
+    </div>
+  </div>
+  <hr/>
+</section>

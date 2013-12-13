@@ -1,0 +1,37 @@
+<tr id="<%= topic.anchor %>">
+  <td class="avatar">
+    <%= link_avatar_to_person(topic.author) %>
+  </td>
+  <td class="content">
+    <h3>
+      <%= link_to topic.title, topic_path(topic, :page => topic.last_page) %>
+    </h3>
+    <div class="info">
+      <% if topic.tags.to_a.any? %>
+        <span class="tags">
+          <% topic.tags.each do |tag| %>
+            <%= link_to tag.name, tagged_topics_path(:tag => tag.name) %>
+          <% end %>
+        </span>
+      <% end %>
+      <span class="author">
+        <%= link_to_person(topic.author) %>
+      </span>
+      <span class="time">
+        <%= t 'created_at' %>
+        <%= format_time topic.created_at %>
+        <% if topic.replies_count > 0 %>
+          ,
+          <%= link_to_person(topic.last_reply_user) %>
+          <%= t 'replied_at' %>
+          <%= format_time topic.actived_at %>
+        <% end %>
+      </span>
+    </div>
+  </td>
+  <td class="reply-count last">
+    <% if topic.replies_count > 0 %>
+      <%= link_to topic.replies_count, topic_path(topic, :page => topic.last_page), :class => ((logined? && topic.last_read?(current_user)) ? 'read' : nil) %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,42 @@
+<header>
+  <h3>
+    <%= t '.account_settings' %>
+  </h3>
+</header>
+<%= form_for current_user, :url => settings_account_path, :validate => true do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :name %>
+      </div>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'span3' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :email %>
+      </div>
+      <div class="controls">
+        <%= f.text_field :email, :class => 'span3' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :locale %>
+      </div>
+      <div class="controls">
+        <%= f.select :locale, AllowLocale.map{|locale| [t(locale), locale]}, {}, :class => 'span3' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="control-label">
+        <%= f.label :current_password %>
+      </div>
+      <div class="controls">
+        <%= f.password_field :current_password, :class => 'span3' %>
+      </div>
+    </div>
+    <%= f.submit t('save'), :class => 'btn primary' %>
+  </fieldset>
+<% end %>

@@ -1,0 +1,17 @@
+<div class="control-group">
+  <div class="full-input-wrap">
+    <%= form.text_field :title, :validate => false, :placeholder => t('.title_placeholder') %>
+  </div>
+</div>
+<div class="control-group">
+  <div id="editor-button-bar"></div>
+  <div class="full-input-wrap">
+    <%= form.text_area :content, :id => 'editor-input', :rows => 20, :validate => false %>
+  </div>
+  <div id="editor-preview"></div>
+</div>
+<div class="control-group">
+  <div class="full-input-wrap">
+    <%= form.text_field :tag_string, :data => {:suggest => Tag.suggest_tags}, :placeholder => t('.tags_placeholder') %>
+  </div>
+</div>
